@@ -1,0 +1,22 @@
+Ora2pg	
+近一周都在研究oracle到postgresql迁移
+总结下当前进度：
+1.在centos7 环境（裸机）下安装了ora2pg（迁移工具）
+附带的需要安装oracle客户端，包括Oracle DBI,Oracle DBD等；
+具体的可见以下转载帖子：
+[Ora2Pg : Migrates Oracle to PostgreSQL](https://ora2pg.darold.net/documentation.html#Limiting-objects-to-export)
+
+2.进行表，存储结构导出
+编辑ora2pg.conf文件，修改对应参数，重要的有
+schema,allow参数（导出权限和范围）
+
+3.导出结果
+存在表，视图，无同义词；
+字段类型改变，比如varchar2（int）类型改为varchar(int)，实际在PostgreSQL里执行会改为cString(int)
+存储过程中的varchar会变成text
+游标会变为 is cursor for等
+
+附上网友上传的差异对比
+[PostgreSQL与Oracle的差异对比 - TechRunner - CSDN博客](https://blog.csdn.net/pierre_/article/details/52268587)
+
+4.未完待续
